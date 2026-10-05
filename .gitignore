@@ -10,3 +10,4 @@ civilization/Logs/
 civilization/UserSettings/
 civilization/work/
 .build-deps/
+release-check/
