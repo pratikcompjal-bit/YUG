@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#20221e"><meta name="description" content="YUG — a historical game prototype set in the world of the Chola dynasty.">
+<title>YUG — The Chola Dynasty</title>
+<link rel="icon" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Libre+Caslon+Display&family=Noto+Serif+Tamil:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-phase="loading">
+<header class="topbar"><a class="brand" href="./index.html" aria-label="YUG home">YUG<span>A passage through time</span></a><div class="header-actions"><span class="prototype-label">CHOLA PROTOTYPE</span><button id="soundToggle" class="quiet-button" aria-pressed="false"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span><span id="soundLabel">Music off</span></button></div></header>
+<canvas id="world" aria-label="Earth rotating toward India" role="img"></canvas>
+<div class="clouds" aria-hidden="true"><div class="cloud cloud-left"></div><div class="cloud cloud-right"></div></div>
+<div class="intro-caption" aria-live="polite"><span class="eyebrow">INDIA · 11TH CENTURY</span><p id="introText">A journey to the south.</p></div>
+<button class="skip-button" id="skipIntro">Skip opening</button><div class="intro-progress" aria-hidden="true"><span id="progress"></span></div>
+<p id="loadError" class="load-error" hidden>The opening couldn’t load. <button id="retryButton">Try again</button></p>
+<main id="landing" class="landing" inert>
+  <figure class="temple-photograph"><img src="assets/chola-temple.jpg" alt="Carved stone tower of the Brihadisvara temple in Thanjavur, beneath a cloudy sky" fetchpriority="high"><figcaption><span class="caption-number">01</span><span>Brihadisvara Temple<small>Thanjavur, Tamil Nadu · Present-day photograph</small></span></figcaption></figure>
+  <section class="welcome" aria-labelledby="welcomeTitle"><p class="chapter-number">CHAPTER ONE <span>11TH CENTURY CE</span></p><span class="tamil-title" lang="ta">சோழர்</span><h1 id="welcomeTitle">The Chola<br>dynasty.</h1><p class="welcome-description">On the banks of the Kaveri, a kingdom takes shape in stone, water and the lives of its people.</p><div class="start-actions"><button id="startButton" class="button primary">Click to Start <span aria-hidden="true">↗</span></button><span class="start-note">Explore the Chola heartland</span></div><div class="chapter-index"><span>YUG</span><i></i><span>01 / CHOLA</span></div></section>
+</main>
+<section id="eraScreen" class="chapter-screen" aria-labelledby="eraHeading" hidden>
+ <div class="chapter-toolbar"><button id="backHome" class="quiet-button">← Back</button><span>01 &nbsp; / &nbsp; THE CHOLA DYNASTY</span><span>11th century CE</span></div>
+ <div class="chapter-layout">
+  <div class="map-column"><div class="map-topline"><h1 id="eraHeading">The Chola heartland</h1><span>SOUTHERN INDIA</span></div><div class="historical-map-wrap"><svg id="historicalMap" viewBox="0 0 660 540" role="img" aria-labelledby="historicalMapTitle historicalMapDesc"><title id="historicalMapTitle">Southern India and significant Chola places</title><desc id="historicalMapDesc">Geographic map showing Thanjavur, Gangaikonda Cholapuram and Nagapattinam. These are places associated with Chola history, not political boundaries.</desc><defs><clipPath id="mapViewport"><rect width="660" height="540"/></clipPath><pattern id="mapGrid" width="110" height="90" patternUnits="userSpaceOnUse"><path d="M110 0H0V90" fill="none" stroke="#687268" stroke-opacity=".1" stroke-width=".5"/></pattern></defs><rect width="660" height="540" fill="#dce0d7"/><rect width="660" height="540" fill="url(#mapGrid)"/><g clip-path="url(#mapViewport)"><g id="historicalLand"></g><g id="historicalLabels"></g></g><text class="land-label" x="180" y="135">SOUTHERN INDIA</text><text class="sea-label" x="465" y="230">Bay of Bengal</text><text class="sea-label" x="70" y="360" transform="rotate(-65 70 360)">Arabian Sea</text><text class="land-label small" x="418" y="497">SRI LANKA</text><g class="north-mark"><text x="595" y="42">N</text><path d="M600 55V96M594 67 600 55 606 67"/></g></svg><div class="map-bottomline"><span><i></i> Chola places</span><span>Geographic reference · not empire boundaries</span></div></div>
+  <div class="location-tabs" role="group" aria-label="Explore Chola places"><button data-place="thanjavur" aria-pressed="true">01 <span>Thanjavur</span></button><button data-place="gangaikonda" aria-pressed="false">02 <span>Gangaikonda<br>Cholapuram</span></button><button data-place="nagapattinam" aria-pressed="false">03 <span>Nagapattinam</span></button></div>
+ </div>
+ <aside class="place-story" aria-live="polite"><span class="eyebrow" id="placeKicker">01 / THE TEMPLE CITY</span><h2 id="placeTitle">Thanjavur</h2><p id="placeDescription">Rajaraja I’s Brihadisvara temple was completed in 1010. Its granite tower remains one of the defining monuments of the Chola period.</p><figure><img src="assets/chola-temple.jpg" alt="Brihadisvara temple in Thanjavur" loading="lazy"><figcaption>Brihadisvara Temple, Thanjavur</figcaption></figure><a id="placeSource" href="https://whc.unesco.org/en/list/250/" target="_blank" rel="noopener">Read the historical reference ↗</a></aside>
+ </div>
+ <div class="civilization-selection"><div><span class="eyebrow">YOUR CIVILIZATION</span><h2>Chola dynasty <span lang="ta">சோழர்</span></h2><p>Southern India · 11th century CE</p></div><div class="selection-action"><button class="button primary" id="selectChola" aria-pressed="false">Select Chola dynasty</button><p id="selectionSummary" role="status">The only civilization in this prototype.</p></div></div>
+  <div id="prototypeNote" class="prototype-note" hidden>
+    <div class="prototype-note-content">
+      <strong>Chola dynasty selected.</strong>
+      <p>Enter a Chola-era village around the temple. Restore its water, food stores, and sanctuary.</p>
+    </div>
+    <div class="prototype-note-action">
+      <button id="launchNativeBtn" class="button primary">Play Chola civilization</button>
+      <button id="browserGameBtn" class="button secondary">Play online strategy game</button>
+      <p class="native-version">Windows game · The Kaveri Settlement</p>
+      <p id="nativeStatus" role="status" aria-live="polite">Opens in a separate game window.</p>
+      <button id="retryNativeStatus" class="quiet-button" hidden>Check launcher again</button>
+      <details class="native-help"><summary>Controls & other versions</summary><p>Move: WASD · Run: Shift · Jump: Space · Camera: arrows or right mouse + drag · Village interaction: F · Temple interaction: E · Journal: Tab · Graphics: G · Inscription: J · Pause: Esc.</p><p>Explore the settlement, meet its steward, gather materials, repair irrigation, stock the granary, and rebuild the temple monument. Progress saves automatically.</p><button id="launchUnrealBtn" class="button secondary" disabled>Latest Unreal version unavailable</button></details>
+    </div>
+  </div>
+</section>
+
+<section id="gameScreen" class="game-screen" aria-labelledby="gameHeading" hidden>
+  <header class="game-topbar">
+    <div class="game-topbar-left">
+      <button id="gameBackToMap" class="quiet-button">← Back to Map</button>
+      <div class="sovereign-banner">
+        <span class="eyebrow">CHOLA IMPERIAL SOVEREIGN</span>
+        <h2 id="sovereignTitle">Rajendra Chola I <span lang="ta">இராஜேந்திர சோழன்</span></h2>
+      </div>
+    </div>
+    <div class="game-topbar-right">
+      <div class="chronicle-badge">
+        <span class="eyebrow" id="gameRegnalKicker">REGNAL YEAR 01</span>
+        <strong id="gameYearDisplay">1014 CE · Ascension</strong>
+      </div>
+      <button id="resetGameBtn" class="quiet-button">↺ Restart Reign</button>
+    </div>
+  </header>
+
+  <div class="imperial-hud">
+    <div class="hud-resources" aria-label="Imperial Treasury & Resources">
+      <div class="hud-item" title="Kalam of Paddy from the Kaveri Delta">
+        <span class="hud-icon">🌾</span>
+        <div class="hud-item-meta">
+          <span class="hud-label">Paddy Grain</span>
+          <strong id="resGrain">1200</strong>
+          <small>Kalam</small>
+        </div>
+      </div>
+      <div class="hud-item" title="Gold Kasus in the Imperial Vaults">
+        <span class="hud-icon">🪙</span>
+        <div class="hud-item-meta">
+          <span class="hud-label">Treasury</span>
+          <strong id="resGold">850</strong>
+          <small>Kasus</small>
+        </div>
+      </div>
+      <div class="hud-item" title="Dressed Granite Quarry Blocks">
+        <span class="hud-icon">🪨</span>
+        <div class="hud-item-meta">
+          <span class="hud-label">Granite</span>
+          <strong id="resGranite">320</strong>
+          <small>Blocks</small>
+        </div>
+      </div>
+      <div class="hud-item" title="Ocean-going Karavai Warships & Caravels">
+        <span class="hud-icon">⚓</span>
+        <div class="hud-item-meta">
+          <span class="hud-label">Ocean Fleet</span>
+          <strong id="resFleet">4</strong>
+          <small>Vessels</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud-metrics" aria-label="Imperial Metrics">
+      <div class="metric-meter" title="Grandeur of Monumental Temples & Sculptures">
+        <div class="metric-header">
+          <span>Temple Grandeur</span>
+          <strong id="meterGrandeurVal">20%</strong>
+        </div>
+        <div class="meter-track"><div id="meterGrandeur" class="meter-fill" style="width:20%"></div></div>
+      </div>
+      <div class="metric-meter" title="Irrigation Network & Agricultural Resilience">
+        <div class="metric-header">
+          <span>Hydraulic Wealth</span>
+          <strong id="meterHydraulicVal">25%</strong>
+        </div>
+        <div class="meter-track"><div id="meterHydraulic" class="meter-fill" style="width:25%"></div></div>
+      </div>
+      <div class="metric-meter" title="Naval Power & Asian Maritime Trade">
+        <div class="metric-header">
+          <span>Maritime Reach</span>
+          <strong id="meterMaritimeVal">15%</strong>
+        </div>
+        <div class="meter-track"><div id="meterMaritime" class="meter-fill" style="width:15%"></div></div>
+      </div>
+      <div class="metric-meter" title="Harmony with Village Assemblies & Sabha">
+        <div class="metric-header">
+          <span>Assembly Harmony</span>
+          <strong id="meterTrustVal">60%</strong>
+        </div>
+        <div class="meter-track"><div id="meterTrust" class="meter-fill" style="width:60%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-layout">
+    <!-- Left Column: Provincial Construction & Development -->
+    <div class="game-column game-column-provinces">
+      <div class="column-header">
+        <span class="eyebrow">HEARTLAND PROVINCES</span>
+        <h3 id="gameHeading">Imperial Works</h3>
+      </div>
+      <div class="game-province-nav" role="tablist" aria-label="Chola Heartland Provinces">
+        <button id="tabThanjavur" class="province-nav-btn active" role="tab" aria-selected="true" data-prov="thanjavur">
+          <span>01</span> <strong>Thanjavur</strong>
+        </button>
+        <button id="tabGangaikonda" class="province-nav-btn" role="tab" aria-selected="false" data-prov="gangaikonda">
+          <span>02</span> <strong>Gangaikonda</strong>
+        </button>
+        <button id="tabNagapattinam" class="province-nav-btn" role="tab" aria-selected="false" data-prov="nagapattinam">
+          <span>03</span> <strong>Nagapattinam</strong>
+        </button>
+      </div>
+
+      <div class="province-hub-card">
+        <div class="province-hub-head">
+          <div>
+            <span class="eyebrow" id="provTagline">Temple City & Epigraphic Capital</span>
+            <h4 id="provName">Thanjavur</h4>
+          </div>
+          <span class="province-tier-badge" id="provTier">Tier 1</span>
+        </div>
+        <div class="province-visual-wrap">
+          <svg class="province-schematic" viewBox="0 0 360 120" role="img" aria-label="Province Architectural Schematic">
+            <rect width="360" height="120" fill="#2d332b" rx="4"/>
+            <path d="M0 115 H360" stroke="#77806b" stroke-width="2"/>
+            <!-- Temple / Hydraulic / Port schematic visual elements -->
+            <g id="schematicThanjavur">
+              <rect x="40" y="90" width="100" height="25" fill="#8c7757"/>
+              <polygon points="90,15 55,90 125,90" fill="#bfa77a"/>
+              <polygon points="90,5 82,15 98,15" fill="#e6c888"/>
+              <circle cx="90" cy="5" r="3" fill="#ffdf9c"/>
+              <path d="M160 85 H320" stroke="#a4b39b" stroke-dasharray="4 4" stroke-width="1.5"/>
+              <text x="160" y="70" fill="#d2d9c7" font-size="11" font-family="'DM Sans',sans-serif">Brihadisvara 216ft Granite Vimana</text>
+              <text x="160" y="105" fill="#8c9780" font-size="10" font-family="'DM Sans',sans-serif">Kaveri riverbanks · Inscriptions plinth</text>
+            </g>
+            <g id="schematicGangaikonda" hidden>
+              <ellipse cx="90" cy="65" rx="70" ry="35" fill="#3c5752" stroke="#5d827a" stroke-width="1.5"/>
+              <path d="M20 65 Q90 40 160 65 T300 65" fill="none" stroke="#73a99e" stroke-width="2"/>
+              <text x="175" y="55" fill="#d2d9c7" font-size="11" font-family="'DM Sans',sans-serif">Cholaganga "Jalamayam Jayastambham"</text>
+              <text x="175" y="80" fill="#8c9780" font-size="10" font-family="'DM Sans',sans-serif">16-Mile Royal Reservoir & Canals</text>
+            </g>
+            <g id="schematicNagapattinam" hidden>
+              <path d="M20 95 C60 95, 70 85, 110 85 C150 85, 160 95, 200 95" fill="none" stroke="#588599" stroke-width="2"/>
+              <polygon points="65,45 80,85 50,85" fill="#936d52"/>
+              <path d="M65 45 V25 M65 25 L85 35 L65 40" fill="#c3ad8c" stroke="#c3ad8c"/>
+              <text x="135" y="50" fill="#d2d9c7" font-size="11" font-family="'DM Sans',sans-serif">Coromandel Harbor & Shipyards</text>
+              <text x="135" y="75" fill="#8c9780" font-size="10" font-family="'DM Sans',sans-serif">Gateway to Srivijaya & Song China</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="projects-list-container">
+        <span class="eyebrow">COMMISSION MONUMENTAL WORKS</span>
+        <div id="projectsList" class="projects-list">
+          <!-- Dynamically populated project cards -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Royal Decrees & Historical Chronicles -->
+    <div class="game-column game-column-chronicle">
+      <div class="column-header">
+        <span class="eyebrow" id="decreeRegnalYear">REGNAL YEAR 01</span>
+        <h3 id="decreeMainTitle">Imperial Decree</h3>
+      </div>
+
+      <article class="decree-card" id="activeDecreeCard" aria-live="polite">
+        <div class="decree-topline">
+          <span class="decree-tamil" id="decreeTamil" lang="ta">நில அளவை மற்றும் வரி நெறிமுறை</span>
+          <span class="decree-period" id="decreeCalYear">1014 CE</span>
+        </div>
+        <h4 class="decree-title" id="decreeTitle">Ascension & Revenue Survey of the Delta</h4>
+        <p class="decree-context" id="decreeContext">
+          As you assume sole sovereignty, the imperial land surveyors (*Kankani*) complete the palm-leaf registers of agricultural yields across the Kaveri basin. How will you fix the royal grain tithe (*Kadamai*)?
+        </p>
+
+        <!-- Mini-game trigger banners when applicable -->
+        <div id="kudavolaiTriggerWrap" class="interactive-trigger-wrap" hidden>
+          <button id="openKudavolaiBtn" class="button secondary mini-trigger-btn">
+            <span>🗳️ Supervise Kudavolai Ballot Drawing</span> ↗
+          </button>
+        </div>
+        <div id="expeditionTriggerWrap" class="interactive-trigger-wrap" hidden>
+          <button id="openExpeditionBtn" class="button secondary mini-trigger-btn">
+            <span>⛵ Plan Srivijaya Voyage Fleet & Cargo</span> ↗
+          </button>
+        </div>
+
+        <div class="decree-options" id="decreeOptions">
+          <!-- Dynamically generated choice buttons -->
+        </div>
+      </article>
+
+      <section class="chronicle-feed-section">
+        <span class="eyebrow">CHOLA EPIGRAPHIC CHRONICLE</span>
+        <div class="chronicle-feed" id="chronicleFeed">
+          <div class="chronicle-entry first">
+            <span class="chronicle-tag">1014 CE</span>
+            <p>Rajendra Chola I ascends the lion-throne of the Chola empire at Gangaikonda Cholapuram, proclaiming justice, temple endowments, and oceanic expansion.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Interactive Kudavolai Modal -->
+  <dialog id="kudavolaiDialog" class="game-dialog">
+    <div class="dialog-inner">
+      <button class="dialog-close-btn" id="closeKudavolaiBtn">×</button>
+      <span class="eyebrow">HISTORICAL DEMOCRATIC SELECTION · UTTIRAMERUR 1015 CE</span>
+      <h3>The Kudavolai Pot-Lot Ballot <span lang="ta">குடவோலை</span></h3>
+      <p class="dialog-explainer">According to the granite inscriptions of Parantaka I & Rajendra at Uttiramerur, candidates for village committees must own 1/4th veli of land, build a house on their site, know the hymns, and maintain clean accounts.</p>
+      
+      <div class="pot-lot-stage">
+        <div class="brass-pot-graphic">
+          <div class="pot-rim"></div>
+          <div class="pot-body">
+            <span class="pot-symbol">🏺</span>
+            <span>BRASS BALLOT POT</span>
+          </div>
+        </div>
+        <div class="palm-leaves-deck" id="palmLeavesDeck">
+          <!-- 3 Palm Leaf candidate tickets -->
+        </div>
+      </div>
+      <div class="dialog-actions">
+        <button id="confirmKudavolaiBtn" class="button primary" disabled>Draw Palm Leaf Lot & Ratify Committee</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Interactive Maritime Expedition Dialog -->
+  <dialog id="expeditionDialog" class="game-dialog">
+    <div class="dialog-inner">
+      <button class="dialog-close-btn" id="closeExpeditionBtn">×</button>
+      <span class="eyebrow">MARITIME TRADE EXPEDITION · NAGAPATTINAM 1019 CE</span>
+      <h3>Eastward Voyage across the Bay of Bengal <span lang="ta">கடல் பயணம்</span></h3>
+      <p class="dialog-explainer">Harness the northeast monsoon to navigate through the Andaman sea to Kedah (Kadaram) and the Srivijaya Straits. Select cargo and warship escorts to balance merchant profit with pirate defense.</p>
+      
+      <div class="voyage-config-grid">
+        <div class="config-box">
+          <label class="eyebrow" for="cargoSelect">EXPEDITION CARGO</label>
+          <select id="cargoSelect" class="game-select">
+            <option value="silk">Fine Kanchipuram Silks & Muslins (High Gold, High Risk)</option>
+            <option value="pepper" selected>Malabar Black Pepper & Kaveri Rice (Steady Profit)</option>
+            <option value="bronze">Sacred Bronze Icons & Metalwork (High Prestige & Treaty)</option>
+          </select>
+        </div>
+        <div class="config-box">
+          <label class="eyebrow" for="escortSelect">WARSHIP ESCORT</label>
+          <select id="escortSelect" class="game-select">
+            <option value="1">1 Karavai Warship (Light Guard)</option>
+            <option value="2" selected>2 Karavai Warships (Balanced Convoy)</option>
+            <option value="3">3 Karavai Warships (Impenetrable Armada)</option>
+          </select>
+        </div>
+      </div>
+      <div id="voyagePreview" class="voyage-preview-box">
+        <strong>Selected Route:</strong> Nagapattinam → Nicobar Lagoon → Straits of Malacca → Srivijaya / Kedah.
+      </div>
+      <div class="dialog-actions">
+        <button id="launchVoyageBtn" class="button primary">Cast Off Fleet into the Eastern Ocean ↗</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- End of Reign / Stone Epigraph Modal -->
+  <dialog id="epilogueDialog" class="game-dialog epilogue-dialog">
+    <div class="dialog-inner stone-slab">
+      <button class="dialog-close-btn" id="closeEpilogueBtn">×</button>
+      <div class="stone-header">
+        <span class="tamil-invocation" lang="ta">ஸ்வஸ்தி ஸ்ரீ கொப்பரகேசரிவன்மரான உடையார் ஸ்ரீ ராஜேந்திர சோழதேவர்க்கு யாண்டு</span>
+        <span class="eyebrow">PERPETUAL STONE INSCRIPTION OF THE REIGN</span>
+        <h2 id="epilogueTitle">Gangaikonda Cholan</h2>
+        <p class="epilogue-epithet" id="epilogueEpithet">He Who Brought the Waters of Holy Ganga to the South</p>
+      </div>
+      <div class="stone-stats-grid">
+        <div class="stone-stat">
+          <span class="eyebrow">MONUMENTS & WORKS</span>
+          <strong id="epilogueProjects">8 Built</strong>
+        </div>
+        <div class="stone-stat">
+          <span class="eyebrow">TEMPLE GRANDEUR</span>
+          <strong id="epilogueGrandeur">85 / 100</strong>
+        </div>
+        <div class="stone-stat">
+          <span class="eyebrow">HYDRAULIC WEALTH</span>
+          <strong id="epilogueHydraulic">90 / 100</strong>
+        </div>
+        <div class="stone-stat">
+          <span class="eyebrow">MARITIME DOMINION</span>
+          <strong id="epilogueMaritime">78 / 100</strong>
+        </div>
+      </div>
+      <div class="stone-inscription-text" id="epilogueText">
+        <!-- Inscription narrative -->
+      </div>
+      <div class="dialog-actions">
+        <button id="playAgainBtn" class="button primary">Begin New Reign in Another Century ↺</button>
+        <button id="copyInscriptionBtn" class="button secondary">Copy Stone Inscription Text</button>
+      </div>
+    </div>
+  </dialog>
+</section>
+
+<footer><button class="quiet-button" id="replayButton" hidden>Replay opening</button><span>YUG · Work in progress</span><button class="quiet-button" id="creditsButton">Photograph & sources</button></footer>
+<dialog id="creditsDialog" aria-labelledby="creditsTitle"><button id="closeCredits" class="close-button" aria-label="Close credits">×</button><h2 id="creditsTitle">Photograph & sources</h2><p>Temple photograph by <strong>Marcllendr</strong>, via <a href="https://commons.wikimedia.org/wiki/File:Brihadisvara_Temple_Thanjavur_Full_View.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>. Cropped and shaded for display; the adapted presentation of the photograph is available under the same license.</p><p>This is a present-day photograph, not a reconstruction of the medieval temple complex.</p><p>Historical reference: <a href="https://whc.unesco.org/en/list/250/" target="_blank" rel="noopener">UNESCO — Great Living Chola Temples</a>. Geographic outlines: Natural Earth, public domain. The map marks selected places rather than territorial boundaries.</p><p>Music is an original synthesized accompaniment, not a historical recording.</p></dialog>
+<script src="assets/geography.js"></script><script src="assets/chola-geography.js"></script><script src="music.js"></script><script src="game.js"></script><script src="eras.js"></script><script src="script.js"></script><script src="native-launcher.js"></script>
+</body></html>
+
+

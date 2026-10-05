@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+preview-*.png
+original/
+archive/
+native-game/
+civilization/Build/
+civilization/Library/
+civilization/Logs/
+civilization/UserSettings/
+civilization/work/
