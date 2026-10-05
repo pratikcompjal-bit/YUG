@@ -9,3 +9,4 @@ civilization/Library/
 civilization/Logs/
 civilization/UserSettings/
 civilization/work/
+.build-deps/

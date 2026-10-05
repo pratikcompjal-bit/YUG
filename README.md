@@ -1,5 +1,7 @@
 # YUG — Chola prototype
 
+Public game page: https://pratikcompjal-bit.github.io/YUG/ . It offers a browser strategy game and the downloadable Windows 3D civilization. For a presentation, add this link and `assets/yug-ppt-qr.png`; `assets/yug-ppt-gameplay.png` is a gameplay screenshot. The QR opens the same public page. The static site is published from `main/docs` on GitHub Pages. Run `python package.py` before pushing future web or native builds, then commit the updated `docs/` files.
+
 Run `Play-YUG.cmd`, keep its window open, and visit http://127.0.0.1:4180/index.html. Python is required for the local native-game bridge. Opening index.html directly still shows the intro but cannot launch a Windows application. The opening retains the cloud → Earth → India sequence, then reveals a photograph-led Chola start screen. Click to Start opens the Chola heartland map.
 
 Only the Chola dynasty is selectable. Three location controls show Thanjavur, Gangaikonda Cholapuram, and Nagapattinam. The map uses detailed Natural Earth geography and location markers, not speculative political borders. 
