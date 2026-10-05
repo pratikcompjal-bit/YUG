@@ -7,6 +7,7 @@ native-game/
 civilization/Build/
 civilization/Library/
 civilization/Logs/
+civilization/Temp/
 civilization/UserSettings/
 civilization/work/
 .build-deps/

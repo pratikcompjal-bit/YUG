@@ -4,7 +4,7 @@
   const message = document.getElementById('nativeStatus');
   const retry = document.getElementById('retryNativeStatus');
   const localBridge = ['127.0.0.1', 'localhost'].includes(location.hostname) && location.port === '4180';
-  const download = 'downloads/YUG-Civilization-Windows-v1.1.zip';
+  const download = 'downloads/YUG-Civilization-Windows-v1.2.zip';
   if (!localBridge) {
     button.textContent = 'Download 3D civilization · Windows';
     button.addEventListener('click', () => { location.href = download; });

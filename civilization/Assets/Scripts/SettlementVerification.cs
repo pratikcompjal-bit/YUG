@@ -17,7 +17,7 @@ public class SettlementVerification : MonoBehaviour
     {
         village=GetComponent<SettlementWorld>();world=GetComponent<TempleWorld>();folder=Path.GetFullPath(Path.Combine(Application.dataPath,"../../work"));Directory.CreateDirectory(folder);
         yield return new WaitForSeconds(2);ScreenCapture.CaptureScreenshot(Path.Combine(folder,"settlement-title.png"));yield return new WaitForSeconds(.3f);
-        world.BeginNew();yield return new WaitForSeconds(.5f);
+        world.BeginNew();yield return new WaitForSeconds(1.2f);ScreenCapture.CaptureScreenshot(Path.Combine(folder,"settlement-start.png"));yield return new WaitForSeconds(.2f);
         Check("new settlement has separate test save",village.savePath.EndsWith("settlement-test.json")&&village.state.grain==0);
         Check("out of range interaction rejected",!village.Interact());
         yield return Visit(village.CanalPoint);Check("repair cannot spend missing resources",!village.Interact()&&!village.state.irrigation&&village.state.wood==0);

@@ -12,7 +12,7 @@ const assert=require('node:assert/strict');
  assert(await page.locator('#launchNativeBtn').isEnabled());
  assert(await page.locator('#browserGameBtn').isVisible());
  await page.click('#browserGameBtn');assert(await page.locator('#gameScreen').isVisible());
- assert.equal((await page.request.head(new URL('downloads/YUG-Civilization-Windows-v1.1.zip',base).href)).status(),200);
+ assert.equal((await page.request.head(new URL('downloads/YUG-Civilization-Windows-v1.2.zip',base).href)).status(),200);
  assert.deepEqual(errors,[]);
  await page.screenshot({path:'preview-shareable-game.png',fullPage:true});
  await browser.close();console.log('PASS: publishable site, online game, Windows archive, no browser errors.');

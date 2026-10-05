@@ -12,7 +12,7 @@ copytree(root / "assets", site / "assets", dirs_exist_ok=True)
 (site / ".nojekyll").touch()
 
 build = root / "civilization" / "Build"
-archive = site / "downloads" / "YUG-Civilization-Windows-v1.1.zip"
+archive = site / "downloads" / "YUG-Civilization-Windows-v1.2.zip"
 archive.parent.mkdir(exist_ok=True)
 with ZipFile(archive, "w", ZIP_DEFLATED, compresslevel=9, strict_timestamps=False) as out:
     out.writestr("YUG Civilization/READ ME FIRST.txt", (

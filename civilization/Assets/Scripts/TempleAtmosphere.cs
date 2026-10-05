@@ -87,8 +87,10 @@ public class TempleAtmosphere : MonoBehaviour
         const int steps=64;
         for(int ring=0;ring<2;ring++)for(int i=0;i<=steps;i++)
         {
-            float a=i*Mathf.PI*2/steps,r=ring==0?79:145;
-            verts.Add(new Vector3(Mathf.Cos(a)*r,ring==0?-1:5+Mathf.PerlinNoise(i*.22f,8)*19,25+Mathf.Sin(a)*r));
+            // Keep ridges beyond the expanded village; the old 79 m inner
+            // ring intersected its southern spawn and filled the camera view.
+            float a=i*Mathf.PI*2/steps,r=ring==0?210:320;
+            verts.Add(new Vector3(Mathf.Cos(a)*r,ring==0?-1:3+Mathf.PerlinNoise(i*.22f,8)*12,25+Mathf.Sin(a)*r));
         }
         for(int i=0;i<steps;i++){int j=i+steps+1;tris.AddRange(new[]{i,j,i+1,i+1,j,j+1});}
         terrain.SetVertices(verts);terrain.SetTriangles(tris,0);terrain.RecalculateNormals();

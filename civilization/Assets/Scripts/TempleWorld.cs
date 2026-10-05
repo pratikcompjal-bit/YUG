@@ -97,19 +97,18 @@ public class TempleWorld : MonoBehaviour
         sun.color = new Color(1, .90f, .72f); sun.intensity = 1.25f;
         sun.shadows = LightShadows.Soft; sun.shadowBias = .035f;
         lightObject.transform.rotation = Quaternion.Euler(32, -42, 0);
-        var skyShader = Shader.Find("Skybox/Procedural");
+        var skyShader = Resources.Load<Shader>("YugSky");
         if (skyShader != null)
         {
             var sky = new Material(skyShader);
-            sky.SetColor("_SkyTint", new Color(.58f, .65f, .64f));
-            sky.SetColor("_GroundColor", new Color(.48f, .40f, .27f));
-            sky.SetFloat("_AtmosphereThickness", 1.4f);sky.SetFloat("_Exposure",.7f); RenderSettings.skybox = sky;
+            RenderSettings.skybox = sky;
         }
         RenderSettings.sun = sun;
         GameObject cameraObject = new GameObject("Pilgrim camera"); cameraObject.tag = "MainCamera";
         Camera camera = cameraObject.AddComponent<Camera>(); camera.fieldOfView = 55;
         camera.nearClipPlane = .08f; camera.farClipPlane = 360;
-        cameraObject.AddComponent<AudioListener>(); cameraObject.AddComponent<TempleLens>();
+        cameraObject.AddComponent<AudioListener>();
+        cameraObject.AddComponent<TempleLens>();
         Application.targetFrameRate = 60;
     }
 
@@ -118,7 +117,9 @@ public class TempleWorld : MonoBehaviour
 
     void BuildTemple()
     {
-        Box("Earth", new Vector3(0, -1, 25), new Vector3(220, 1, 310), CholaKit.earth);
+        // Carry the Kaveri plain past the camera's far horizon. The former
+        // ground edge exposed the procedural skybox's dark underside at spawn.
+        Box("Earth", new Vector3(0, -1, 20), new Vector3(680, 1, 900), CholaKit.earth);
         Box("Axial processional stone path", new Vector3(0, 0, 0), new Vector3(7, .035f, 38), CholaKit.stone);
         // Walled courtyard with an open southern gateway and generous circulation around each landmark.
         Box("West enclosure", new Vector3(-32, 0, 28), new Vector3(1.4f, 3.5f, 92), CholaKit.plaster);
