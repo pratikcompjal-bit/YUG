@@ -4,13 +4,13 @@
   const message = document.getElementById('nativeStatus');
   const retry = document.getElementById('retryNativeStatus');
   const localBridge = ['127.0.0.1', 'localhost'].includes(location.hostname) && location.port === '4180';
-  const download = 'downloads/YUG-Civilization-Windows.zip';
+  const download = 'downloads/YUG-Civilization-Windows-v1.1.zip';
   if (!localBridge) {
     button.textContent = 'Download 3D civilization · Windows';
     button.addEventListener('click', () => { location.href = download; });
     unreal.hidden = true;
     retry.hidden = true;
-    message.textContent = 'The 3D settlement is a Windows game. Download the ZIP, extract it, then open YUG Civilization.exe. The online strategy game plays here in your browser.';
+    message.textContent = 'The 3D settlement runs on 64-bit Windows. Extract the entire ZIP, open the YUG Civilization folder, then run YUG Civilization.exe. Keep all extracted files together. The online strategy game plays here in your browser.';
     return;
   }
   let token, polling, launching = false, wasRunning = false;
